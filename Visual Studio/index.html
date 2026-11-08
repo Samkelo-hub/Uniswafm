@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UNESWA Media Portal | Home</title>
+    <style>
+        :root { --primary: #4A154B; --secondary: #008080; --dark: #1F2937; --light: #F9FAFB; }
+        body { font-family: 'Segoe UI', system-ui, sans-serif; margin: 0; padding: 0; background-color: var(--light); color: var(--dark); }
+        header { background-color: var(--primary); color: white; padding: 1.5rem; text-align: center; }
+        nav ul { list-style: none; padding: 0; margin: 1rem 0 0 0; display: flex; justify-content: center; gap: 2rem; background: rgba(0,0,0,0.2); padding: 0.75rem; }
+        nav a { color: white; text-decoration: none; font-weight: bold; font-size: 1rem; }
+        nav a:hover { color: #00FFFF; }
+        .hero { background: linear-gradient(135deg, var(--primary), var(--secondary)); color: white; padding: 4rem 2rem; text-align: center; }
+        .hero h2 { font-size: 2.5rem; margin-bottom: 1rem; }
+        main { max-width: 1100px; margin: 2rem auto; padding: 0 1rem; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin-top: 2rem; }
+        .card { background: white; padding: 2rem; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); border-top: 4px solid var(--secondary); }
+        footer { background-color: var(--dark); color: #9CA3AF; text-align: center; padding: 1.5rem; margin-top: 4rem; font-size: 0.875rem; }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>UNIVERSITY OF ESWATINI</h1>
+        <p>Department of Journalism and Mass Communication</p>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="shows.html">UNESWA FM Schedule</a></li>
+                <li><a href="hub.html">Content Hub</a></li>
+                <li><a href="training.html">Training & Academy</a></li>
+                <li><a href="contact.html">Contact & Stream</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <h2>The Voice of the Youth, The Hub of Innovation</h2>
+        <p>Bridging traditional radio broadcasting with state-of-the-art multimedia production at Kwaluseni Campus.</p>
+    </section>
+
+    <main>
+        <h2>Welcome to UNESWA's Media Transformation</h2>
+        <p>The University of Eswatini pushes boundaries by marrying creative talent with advanced technology. Through <strong>UNESWA FM 88.2</strong> and our brand new <strong>UNESWA Content Hub</strong>, we provide a cross-platform environment for local talent creation, community discourse, and national economic empowerment in the digital economy.</p>
+        
+        <div class="grid">
+            <div class="card">
+                <h3>UNESWA FM 88.2</h3>
+                <p>Our premier university radio broadcasting station. Run entirely by the Department of Journalism and Mass Communication (JMC) as a living laboratory for future industry leaders.</p>
+                <p><a href="shows.html" style="color: var(--secondary); font-weight: bold;">Explore Shows &rarr;</a></p>
+            </div>
+            <div class="card">
+                <h3>The Digital Content Hub</h3>
+                <p>Inaugurated by His Majesty King Mswati III, this multi-million Emalangeni infrastructure serves as Eswatini's first comprehensive content development pipeline for commercial film, TV, and podcasts.</p>
+                <p><a href="hub.html" style="color: var(--secondary); font-weight: bold;">Tour the Studios &rarr;</a></p>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 University of Eswatini Media Portal. All Rights Reserved. Funded by ESCCOM UASF & UNDP.</p>
+    </footer>
+
+</body>
+</html>

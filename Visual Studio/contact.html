@@ -1,0 +1,336 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact & Stream | UNESWA Media Portal</title>
+
+    <style>
+        :root {
+            --primary: #4A154B;
+            --secondary: #008080;
+            --dark: #1F2937;
+            --light: #F9FAFB;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--light);
+            color: var(--dark);
+        }
+
+        header {
+            background-color: var(--primary);
+            color: white;
+            padding: 1.5rem;
+            text-align: center;
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0.75rem;
+            margin: 1rem 0 0;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            background: rgba(0, 0, 0, 0.2);
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        nav a:hover {
+            color: #00FFFF;
+        }
+
+        main {
+            max-width: 1100px;
+            margin: 3rem auto;
+            padding: 0 1rem;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+        }
+
+        .form-section {
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+
+        .info-section {
+            padding: 1rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.25rem;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+            font-size: 0.9rem;
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #D1D5DB;
+            border-radius: 4px;
+            font: inherit;
+        }
+
+        input:focus, select:focus, textarea:focus {
+            outline: 2px solid var(--secondary);
+            outline-offset: 2px;
+        }
+
+        textarea {
+            resize: vertical;
+        }
+
+        button {
+            background-color: var(--secondary);
+            color: white;
+            border: none;
+            padding: 0.9rem 1.5rem;
+            font-size: 1rem;
+            font-weight: bold;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        button:hover {
+            background-color: #006666;
+        }
+
+        #formFeedback {
+            margin-top: 1rem;
+            line-height: 1.5;
+            font-weight: 600;
+        }
+
+        .stream-link {
+            color: var(--secondary);
+            font-weight: bold;
+        }
+
+        footer {
+            background-color: var(--dark);
+            color: #9CA3AF;
+            text-align: center;
+            padding: 1.5rem;
+            margin-top: 3rem;
+            font-size: 0.875rem;
+        }
+
+        @media (max-width: 768px) {
+            main {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .form-section {
+                padding: 1.5rem;
+            }
+
+            nav ul {
+                gap: 1rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h1>Connect With Our Team</h1>
+        <p>Book Studio Time, Submit News, or Request Ad Airtime</p>
+
+        <nav aria-label="Main navigation">
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="shows.html">UNESWA FM Schedule</a></li>
+                <li><a href="hub.html">Content Hub</a></li>
+                <li><a href="training.html">Training & Academy</a></li>
+                <li><a href="contact.html" aria-current="page">Contact & Stream</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="form-section">
+            <h2>Inquiry & Studio Request Form</h2>
+
+            <form id="inquiryForm">
+                <div class="form-group">
+                    <label for="name">Full Name / Organization</label>
+                    <input
+                        type="text"
+                        id="name"
+                        name="fullName"
+                        placeholder="e.g., John Dlamini"
+                        required
+                        minlength="2"
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input
+                        type="email"
+                        id="email"
+                        name="email"
+                        placeholder="name@example.com"
+                        required
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label for="intent">Primary Inquiry Intent</label>
+                    <select id="intent" name="inquiryType" required>
+                        <option value="radio-ad">UNESWA FM Advertising</option>
+                        <option value="studio-book">Content Hub Commercial Booking</option>
+                        <option value="academy">Short Course Registration</option>
+                        <option value="news">Submit Live Campus Tip</option>
+                        <option value="other">Other Inquiry</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="message">Detailed Message</label>
+                    <textarea
+                        id="message"
+                        name="message"
+                        rows="5"
+                        minlength="10"
+                        required
+                        placeholder="Outline your requirements or proposal..."
+                    ></textarea>
+                </div>
+
+                <button type="submit">Submit Request</button>
+
+                <p id="formFeedback" role="status" aria-live="polite"></p>
+            </form>
+        </section>
+
+        <section class="info-section">
+            <h2>Direct Contact Channels</h2>
+
+            <p>
+                Our operation desks handle physical inquiries, music
+                submissions for artists, and campus updates during
+                broadcast hours.
+            </p>
+
+            <p>
+                <strong>📍 Physical Address:</strong><br>
+                Department of Journalism and Mass Communication,<br>
+                University of Eswatini, Kwaluseni Campus,<br>
+                Matsapha, Eswatini
+            </p>
+
+            <p>
+                <strong>📞 Hotline Numbers:</strong><br>
+                +268 7807 3440 / +268 7907 3440
+            </p>
+
+            <p>
+                <strong>✉️ Electronic Mail:</strong><br>
+                <a href="mailto:uneswaradio@gmail.com">
+                    uneswaradio@gmail.com
+                </a>
+            </p>
+
+            <h2 style="margin-top: 2.5rem;">Digital Streaming Access</h2>
+
+            <p>
+                Can't pick up our frequency locally on 88.2 FM?
+                Access the digital stream through the following link.
+            </p>
+
+            <p>
+                <a
+                    class="stream-link"
+                    href="https://zeno.fm/radio/uneswa-fm/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    Listen to UNESWA FM Live
+                </a>
+            </p>
+        </section>
+    </main>
+
+    <footer>
+        <p>
+            &copy; 2026 University of Eswatini Media Portal.
+            All Rights Reserved. Funded by ESCCOM UASF & UNDP.
+        </p>
+    </footer>
+
+    <script>
+        const inquiryForm = document.getElementById("inquiryForm");
+        const feedback = document.getElementById("formFeedback");
+
+        inquiryForm.addEventListener("submit", function (event) {
+            event.preventDefault();
+
+            const fullName =
+                document.getElementById("name").value.trim();
+
+            const email =
+                document.getElementById("email").value.trim();
+
+            const inquiryType =
+                document.getElementById("intent").value;
+
+            const message =
+                document.getElementById("message").value.trim();
+
+            if (fullName.length < 2 || message.length < 10) {
+                feedback.textContent =
+                    "Please enter your name and a message of at least 10 characters.";
+
+                feedback.style.color = "#B91C1C";
+                return;
+            }
+
+            const request = {
+                fullName,
+                email,
+                inquiryType,
+                message
+            };
+
+            console.log("Inquiry form data:", request);
+
+            feedback.textContent =
+                "Thank you, " + fullName +
+                "! Your form has been validated successfully. " +
+                "Please note: this demonstration does not send or store your request.";
+
+            feedback.style.color = "#047857";
+
+            inquiryForm.reset();
+        });
+    </script>
+
+</body>
+</html>
+```

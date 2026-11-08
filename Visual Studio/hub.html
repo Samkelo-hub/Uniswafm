@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UNESWA Content Hub | Production Facilities & Screening</title>
+    <!-- Include the Official Supabase Cloud Library -->
+    <script src="https://jsdelivr.net"></script>
+    <style>
+        :root { --primary: #4A154B; --secondary: #008080; --dark: #1F2937; --light: #F9FAFB; }
+        body { font-family: 'Segoe UI', system-ui, sans-serif; margin: 0; padding: 0; background-color: var(--light); color: var(--dark); }
+        header { background-color: var(--primary); color: white; padding: 1.5rem; text-align: center; }
+        nav ul { list-style: none; padding: 0; margin: 1rem 0 0 0; display: flex; justify-content: center; gap: 2rem; background: rgba(0,0,0,0.2); padding: 0.75rem; }
+        nav a { color: white; text-decoration: none; font-weight: bold; }
+        main { max-width: 1100px; margin: 3rem auto; padding: 0 1rem; }
+        .hub-media-grid { display: grid; grid-template-columns: 1.8fr 1.2fr; gap: 2.5rem; margin: 2rem 0 4rem 0; }
+        .theater-box { background: #000; border-radius: 8px; overflow: hidden; box-shadow: 0 10px 15px rgba(0,0,0,0.15); padding: 8px; }
+        .video-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; background: #111; }
+        .video-container iframe, .video-container video { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; }
+        .theater-details { background: white; padding: 1.5rem; border-radius: 0 0 8px 8px; margin-top: -8px; border: 1px solid #E5E7EB; }
+        .live-tag { background: #FEE2E2; color: #991B1B; padding: 0.25rem 0.6rem; border-radius: 4px; font-size: 0.75rem; font-weight: bold; display: inline-block; margin-bottom: 0.5rem; }
+        .upload-panel { background: white; padding: 2rem; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); border-top: 4px solid var(--primary); height: fit-content; }
+        .drag-zone { border: 2px dashed #D1D5DB; padding: 1.5rem; text-align: center; border-radius: 6px; background: #F9FAFB; cursor: pointer; margin-bottom: 1.25rem; transition: all 0.3s ease; }
+        .drag-zone:hover { border-color: var(--secondary); background: #F0FDFA; }
+        .file-selected-text { color: var(--secondary); font-weight: bold; font-size: 0.85rem; margin-top: 5px; display: none; }
+        .form-group { margin-bottom: 1.25rem; }
+        label { display: block; margin-bottom: 0.5rem; font-weight: bold; font-size: 0.9rem; }
+        input, select { width: 100%; padding: 0.75rem; border: 1px solid #D1D5DB; border-radius: 4px; box-sizing: border-box; }
+        .progress-container { display: none; margin-bottom: 1.25rem; }
+        .progress-bar-bg { background: #E5E7EB; border-radius: 9999px; height: 10px; width: 100%; overflow: hidden; margin-top: 5px; }
+        .progress-bar-fill { background: var(--secondary); width: 0%; height: 100%; transition: width 0.2s ease; }
+        .progress-text { font-size: 0.8rem; font-weight: bold; color: #4B5563; display: flex; justify-content: space-between; }
+        button.upload-btn { background-color: var(--secondary); color: white; border: none; padding: 0.85rem; font-size: 1rem; font-weight: bold; border-radius: 4px; cursor: pointer; width: 100%; transition: background 0.2s; }
+        button.upload-btn:hover { background-color: #006666; }
+        .facility-block { display: flex; flex-direction: column; gap: 3rem; margin-top: 2rem; }
+        .facility-item { background: white; padding: 2.5rem; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); display: flex; gap: 2rem; align-items: center; }
+        .facility-text { flex: 2; }
+        .facility-spec { flex: 1; background: #F3F4F6; padding: 1.5rem; border-radius: 6px; font-size: 0.9rem; }
+        .facility-spec ul { padding-left: 1.25rem; }
+        footer { background-color: var(--dark); color: #9CA3AF; text-align: center; padding: 1.5rem; margin-top: 4rem; font-size: 0.875rem; }
+        @media(max-width: 900px) { .hub-media-grid { grid-template-columns: 1fr; } .facility-item { flex-direction: column; align-items: flex-start; gap: 1rem; } }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>UNESWA Content Hub</h1>
+        <p>State-Of-The-Art Media Production Ecosystem</p>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="shows.html">UNESWA FM Schedule</a></li>
+                <li><a href="hub.html">Content Hub</a></li>
+                <li><a href="training.html">Training & Academy</a></li>
+                <li><a href="contact.html">Contact & Stream</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <h2>Empowering Eswatini's Creative Industry</h2>
+        <p>Funded by the <strong>Eswatini Communications Commission (ESCCOM) Universal Access Service Fund (UASF)</strong> in collaboration with the <strong>UNDP</strong>.</p>
+        
+        <div class="hub-media-grid">
+            <!-- LEFT COLUMN: LIVE VIDEO THEATER -->
+            <section>
+                <h3 style="margin-top: 0; color: var(--primary);">🎬 Now Screening: Live Hub Content</h3>
+                <div class="theater-box">
+                    <div class="video-container" id="theaterContainer">
+                        <!-- Default greeting text when no video is loaded yet -->
+                        <div id="noVideoMessage" style="color: white; padding: 4rem; text-align: center;">
+                            <p style="font-size: 1.5rem; margin: 0;">No Active Stream</p>
+                            <p style="color: #9CA3AF; font-size: 0.9rem; margin-top: 10px;">Upload a production file on the right side to start screening.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="theater-details">
+                    <span class="live-tag" id="videoBadge">OFFLINE</span>
+                    <h4 id="nowPlayingTitle" style="margin: 0.25rem 0 0.5rem 0; font-size: 1.25rem;">Waiting for Student Broadcast File...</h4>
+                    <p id="nowPlayingCrew" style="margin: 0; color: #4B5563; font-size: 0.9rem; line-height: 1.4;">Select your production file and use the controller on the right side to mount your broadcast video natively onto the cloud platform.</p>
+                </div>
+            </section>
+
+            <!-- RIGHT COLUMN: REAL PRODUCTION UPLOAD PANEL -->
+            <section class="upload-panel">
+                <h3 style="margin-top: 0; color: var(--primary);">📤 Upload Real Video File</h3>
+                <p style="font-size: 0.85rem; color: #6B7280; margin-bottom: 1.25rem;">This panel transmits real files into the live secure cloud environment immediately.</p>
+                
+                <form id="uploadForm" onsubmit="uploadToCloud(event)">
+                    <div class="form-group">
+                        <label>Select Media File (.mp4 only)</label>
+                        <div class="drag-zone" onclick="document.getElementById('videoFile').click();">
+                            <span style="font-size: 1.75rem; display: block; margin-bottom: 0.25rem;">📁</span>
+                            <span style="font-weight: bold; font-size: 0.85rem; color: var(--secondary);">Click to Browse Storage</span>
+                            <p id="uploadPrompt" style="margin: 3px 0 0 0; font-size: 0.75rem; color: #9CA3AF;">MP4 Formats Only</p>
+                            <p id="fileSelectedName" class="file-selected-text"></p>
+                            <input type="file" id="videoFile" accept="video/mp4" required style="display: none;" onchange="displayFileName()">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="videoTitle">Production / Video Title</label>
+                        <input type="text" id="videoTitle" required placeholder="e.g., Campus News Week 1">
+                    </div>
+                    <div class="form-group">
+                        <label for="crew">Production Team Name</label>
+                        <input type="text" id="crew" required placeholder="e.g., JMC Group B">
+                    </div>
+                    <div class="progress-container" id="progressContainer">
+                        <div class="progress-text">
+                            <span id="statusLabel">Uploading to cloud storage...</span>
+                            <span id="progressPercentage">0%</span>
+                        </div>
+                        <div class="progress-bar-bg"><div class="progress-bar-fill" id="progressBarFill"></div></div>
+                    </div>
+                    <button type="submit" class="upload-btn" id="submitBtn">Upload & Stream Instantly</button>
+                </form>
+            </section>
+        </div>
+    </main>
+
+        <script>
+        // 設定您的專案參數（直接使用您提供的網址與金鑰）
+        const PROJECT_ID = "fdwxrnwfvrpfwbxglpbf";
+        const SUPABASE_KEY = "sb_publishable_76vJdU3pZTAGTRcZ824ljA_IY6TxFL-"; 
+        const BUCKET_NAME = "uneswa-videos";
+
+        function displayFileName() {
+            const fileInput = document.getElementById('videoFile');
+            const prompt = document.getElementById('uploadPrompt');
+            const selectedText = document.getElementById('fileSelectedName');
+            
+            if(fileInput.files.length > 0) {
+                prompt.style.display = 'none';
+                selectedText.innerText = "✓ Ready: " + fileInput.files[0].name;
+                selectedText.style.display = 'block';
+            }
+        }
+
+        async function uploadToCloud(event) {
+            event.preventDefault();
+            
+            const fileInput = document.getElementById('videoFile');
+            if (fileInput.files.length === 0) return alert('Please choose an MP4 video file first.');
+            
+            const file = fileInput.files[0];
+            const title = document.getElementById('videoTitle').value;
+            const crewName = document.getElementById('crew').value;
+
+            const pContainer = document.getElementById('progressContainer');
+            const pFill = document.getElementById('progressBarFill');
+            const pPercent = document.getElementById('progressPercentage');
+            const submitBtn = document.getElementById('submitBtn');
+            const statusLabel = document.getElementById('statusLabel');
+
+            pContainer.style.display = 'block';
+            submitBtn.disabled = true;
+            submitBtn.style.background = '#9CA3AF';
+            submitBtn.innerText = 'Uploading...';
+
+            // 清理檔名，使用時間戳記避免重複衝突
+            const fileExtension = file.name.split('.').pop();
+            const uniqueFileName = `${Date.now()}_uneswa_broadcast.${fileExtension}`;
+
+            // 精確定位到 Supabase 儲存桶 API 端點
+            const uploadUrl = `https://${PROJECT_ID}.supabase.co/storage/v1/object/${BUCKET_NAME}/${uniqueFileName}`;
+
+            // 上傳期間的進度條動畫
+            let currentProgress = 0;
+            const progressTimer = setInterval(() => {
+                if (currentProgress < 90) {
+                    currentProgress += 10;
+                    pFill.style.width = currentProgress + '%';
+                    pPercent.innerText = currentProgress + '%';
+                }
+            }, 200);
+
+            try {
+                // 使用原生 Fetch 發送二進位影片檔案
+                const response = await fetch(uploadUrl, {
+                    method: 'POST',
+                    headers: {
+                        'Authorization': `Bearer ${SUPABASE_KEY}`,
+                        'apikey': SUPABASE_KEY,
+                        'Content-Type': file.type
+                    },
+                    body: file
+                });
+
+                clearInterval(progressTimer);
+
+                if (!response.ok) {
+                    const errorData = await response.json();
+                    throw new Error(errorData.message || 'Server rejected the file.');
+                }
+
+                // 成功後，建立雲端影片的公開觀看網址
+                const videoUrl = `https://${PROJECT_ID}.supabase.co/storage/v1/object/public/${BUCKET_NAME}/${uniqueFileName}`;
+
+                // 將進度條衝滿
+                pFill.style.width = '100%';
+                pPercent.innerText = '100%';
+                statusLabel.innerText = 'Injecting video stream...';
+
+                setTimeout(() => {
+                    // 將左側黑盒子替換成真正的 HTML5 播放器並自動播放
+                    const theater = document.getElementById('theaterContainer');
+            
+                    theater.innerHTML = `<video id="activePlayer" controls autoplay style="width:100%; height:100%; object-fit: contain;"><source src="${videoUrl}" type="video/mp4">Your browser does not support HTML5 video.</video>`;
+
+                    
+                    // 更新播放器下方的文字標籤
+                    document.getElementById('videoBadge').innerText = "LIVE STREAM";
+                    document.getElementById('videoBadge').style.background = "#D1FAE5";
+                    document.getElementById('videoBadge').style.color = "#065F46";
+                    document.getElementById('nowPlayingTitle').innerText = title;
+                    document.getElementById('nowPlayingCrew').innerText = "Produced By: " + crewName;
+
+                    // 重設右側表單
+                    document.getElementById('uploadForm').reset();
+                    pContainer.style.display = 'none';
+                    document.getElementById('fileSelectedName').style.display = 'none';
+                    document.getElementById('uploadPrompt').style.display = 'block';
+                    submitBtn.disabled = false;
+                    submitBtn.style.background = 'var(--secondary)';
+                    submitBtn.innerText = 'Upload & Stream Instantly';
+                    
+                    alert('Broadcast Loaded Successfully! Your video is streaming straight from the cloud server.');
+                }, 1000);
+
+            } catch (err) {
+                clearInterval(progressTimer);
+                alert('Upload failed: ' + err.message + '\n\n💡提示：請確認 Supabase Storage 內的 Policies 是否已新增允許 INSERT 的權限。');
+                submitBtn.disabled = false;
+                submitBtn.style.background = 'var(--secondary)';
+                submitBtn.innerText = 'Upload & Stream Instantly';
+                pContainer.style.display = 'none';
+            }
+        }
+    </script>
